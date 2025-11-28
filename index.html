@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DevLearn Hub - Educational Tech Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --primary: #2563eb;
+            --accent: #f97316;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius: 14px;
+            --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #111827;
+            color: #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 1px 0 rgba(15, 23, 42, 0.7);
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 10% 10%, #f97316, #2563eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .brand-title {
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+        }
+
+        .brand-sub {
+            font-size: 0.7rem;
+            color: #9ca3af;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: #e5e7eb;
+            opacity: 0.9;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: #fff;
+        }
+
+        .nav-cta {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            background: #f97316;
+            color: #111827;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* LAYOUT WRAPPER */
+
+        main {
+            max-width: 1100px;
+            margin: 1.6rem auto 2.4rem;
+            padding: 0 1.5rem;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #111827, #1d4ed8);
+            border-radius: 20px;
+            padding: 1.4rem 1.6rem 1.6rem;
+            color: #e5e7eb;
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+            gap: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: clamp(1.9rem, 3vw, 2.4rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            color: #cbd5f5;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+        }
+
+        .hero-tag {
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .hero-image {
+            border-radius: 16px;
+            overflow: hidden;
+            background: #020617;
+            min-height: 200px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0.9;
+        }
+
+        /* MAIN CONTENT GRID */
+
+        .content {
+            margin-top: 1.8rem;
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
+            gap: 1.5rem;
+        }
+
+        /* BLOG LIST */
+
+        .section-heading {
+            font-size: 1.1rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.4rem;
+        }
+
+        .section-heading span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .post-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .post-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            display: grid;
+            grid-template-columns: 0.95fr 1.25fr;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            box-shadow: var(--shadow);
+        }
+
+        .post-thumb {
+            border-radius: 10px;
+            overflow: hidden;
+            min-height: 120px;
+        }
+
+        .post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-body {
+            font-size: 0.88rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .post-category {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--primary);
+        }
+
+        .post-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .post-excerpt {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+        }
+
+        .post-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.15rem;
+        }
+
+        .post-tag {
+            font-size: 0.7rem;
+            padding: 0.1rem 0.45rem;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .read-link {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        /* SINGLE POST (EDUCATIONAL ARTICLE) */
+
+        .single-post {
+            margin-top: 1.8rem;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem 1.1rem 1.2rem;
+        }
+
+        .single-post h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .single-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.7rem;
+        }
+
+        .single-content p {
+            font-size: 0.9rem;
+            color: #374151;
+            margin-bottom: 0.6rem;
+        }
+
+        .single-content ul {
+            margin-left: 1.1rem;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+
+        .single-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* COMMENT SECTION (FRONT-END ONLY) */
+
+        .comments {
+            margin-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.9rem;
+        }
+
+        .comments h3 {
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .comment-form .field {
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .comment-form label {
+            display: block;
+            margin-bottom: 0.2rem;
+            color: var(--text-muted);
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 0.5rem 0.6rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+            outline: none;
+            resize: vertical;
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .comment-btn {
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            border: none;
+            background: var(--primary);
+            color: #f9fafb;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .comment-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .sidebar-block {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 0.9rem 1rem;
+            box-shadow: var(--shadow);
+            font-size: 0.85rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .category-list,
+        .tag-cloud,
+        .recent-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            padding: 0.25rem 0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+        }
+
+        .category-list span.name {
+            color: #111827;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            font-size: 0.78rem;
+        }
+
+        .tag-cloud span {
+            padding: 0.22rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            cursor: pointer;
+        }
+
+        .tag-cloud span:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .recent-list li {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .recent-list li:last-child {
+            border-bottom: none;
+        }
+
+        .recent-title {
+            font-size: 0.82rem;
+        }
+
+        .recent-meta {
+            font-size: 0.73rem;
+            color: var(--text-muted);
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 1.8rem;
+            border-top: 1px solid #e5e7eb;
+            padding: 0.9rem 1.5rem 1.3rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .post-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .nav-links {
+                display: none; /* simple mobile nav (no JS) */
+            }
+
+            main {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="nav">
+        <div class="brand">
+            <div class="brand-logo">DL</div>
+            <div>
+                <div class="brand-title">DevLearn Hub</div>
+                <div class="brand-sub">Educational Tech Blog</div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#top">Home</a>
+            <a href="#list">Articles</a>
+            <a href="#categories">Categories</a>
+            <a href="#comments">Comments</a>
+        </div>
+        <button class="nav-cta">Subscribe</button>
+    </nav>
+</header>
+
+<main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+        <div>
+            <h1>Learn Technology, One Concept at a Time.</h1>
+            <p>
+                DevLearn Hub is an educational blog focused on Programming, Web Development,
+                AI, and Cyber Security. Simple explanations, real examples, and practical tips
+                to grow your skills.
+            </p>
+            <div class="hero-tags">
+                <span class="hero-tag">#HTML</span>
+                <span class="hero-tag">#CSS</span>
+                <span class="hero-tag">#JavaScript</span>
+                <span class="hero-tag">#BeginnerFriendly</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                 alt="Person coding on laptop in cafe">
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <section class="content">
+        <!-- LEFT: BLOG LIST + SINGLE ARTICLE -->
+        <div>
+            <!-- BLOG LIST -->
+            <section id="list">
+                <div class="section-heading">
+                    <h2>Latest Articles</h2>
+                    <span>Educational posts about technology</span>
+                </div>
+
+                <div class="post-list">
+                    <!-- Post 1 -->
+                    <article class="post-card">
+                        <div class="post-thumb">
+                            <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                 alt="Laptop screen with code">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-category">Web Development</div>
+                            <h3 class="post-title">How the Internet Works in Simple Words</h3>
+                            <p class="post-excerpt">
+                                Before learning HTML, CSS or JavaScript, it is important to understand
+                                what actually happens when you open a website or type a URL in the browser.
+                            </p>
+                            <div class="post-tags">
+                                <span class="post-tag">Networking</span>
+                                <span class="post-tag">Beginner</span>
+                                <span class="post-tag">HTTP</span>
+                            </div>
+                            <div class="post-meta">
+                                <span>By Ankit Sharma • 6 min read</span>
+                                <span class="read-link">Read Article →</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post 2 -->
+                    <article class="post-card">
+                        <div class="post-thumb">
+                            <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                 alt="Padlock on keyboard cybersecurity">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-category">Cyber Security</div>
+                            <h3 class="post-title">Top 5 Simple Tips to Stay Safe Online</h3>
+                            <p class="post-excerpt">
+                                You don’t need to be a hacker to understand cyber security.
+                                These five basic steps can protect your accounts and personal data.
+                            </p>
+                            <div class="post-tags">
+                                <span class="post-tag">Security</span>
+                                <span class="post-tag">Passwords</span>
+                                <span class="post-tag">Privacy</span>
+                            </div>
+                            <div class="post-meta">
+                                <span>By Editor • 4 min read</span>
+                                <span class="read-link">Read Article →</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Post 3 -->
+                    <article class="post-card">
+                        <div class="post-thumb">
+                            <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                 alt="Student learning programming">
+                        </div>
+                        <div class="post-body">
+                            <div class="post-category">Programming</div>
+                            <h3 class="post-title">What is a Programming Language?</h3>
+                            <p class="post-excerpt">
+                                In this post we break down the idea of programming languages,
+                                how they talk to computers, and which one you should start with.
+                            </p>
+                            <div class="post-tags">
+                                <span class="post-tag">C</span>
+                                <span class="post-tag">Python</span>
+                                <span class="post-tag">Concepts</span>
+                            </div>
+                            <div class="post-meta">
+                                <span>By Guest Author • 5 min read</span>
+                                <span class="read-link">Read Article →</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SINGLE EDUCATIONAL POST + COMMENTS -->
+            <article class="single-post" id="comments">
+                <h2>Example Article: HTML vs CSS – What’s the Difference?</h2>
+                <div class="single-meta">
+                    Published on 28 November 2025 · Tags: <strong>HTML</strong>, <strong>CSS</strong>, <strong>Web Basics</strong>
+                </div>
+                <div class="single-content">
+                    <p>
+                        When you start web development, two names come again and again:
+                        <strong>HTML</strong> and <strong>CSS</strong>. Both are very important, but they do different jobs.
+                    </p>
+                    <p>
+                        You can think of a website like a human body:
+                    </p>
+                    <ul>
+                        <li><strong>HTML</strong> is the <em>skeleton</em> – it gives basic structure.</li>
+                        <li><strong>CSS</strong> is the <em>clothes & style</em> – it makes things beautiful.</li>
+                    </ul>
+                    <p>
+                        For example, a simple heading, paragraph and button is written using HTML.
+                        But the colours, fonts, spacing, and layout are controlled using CSS.
+                    </p>
+                    <p>
+                        So, if you want to become a front-end developer, start with HTML first,
+                        then slowly add CSS to make your pages look professional.
+                    </p>
+                </div>
+
+                <!-- COMMENTS (STATIC FORM) -->
+                <section class="comments">
+                    <h3>Leave a Comment</h3>
+                    <form class="comment-form">
+                        <div class="field">
+                            <label for="c-name">Name</label>
+                            <input type="text" id="c-name" placeholder="Your name">
+                        </div>
+                        <div class="field">
+                            <label for="c-email">Email</label>
+                            <input type="email" id="c-email" placeholder="you@example.com">
+                        </div>
+                        <div class="field">
+                            <label for="c-message">Comment</label>
+                            <textarea id="c-message" rows="3" placeholder="Write your feedback or question..."></textarea>
+                        </div>
+                        <button type="submit" class="comment-btn">Post Comment</button>
+                        <p class="comment-note">
+                            This is a front-end demo only. In a real project, comments would be saved using a backend (PHP, Node.js, etc.).
+                        </p>
+                    </form>
+                </section>
+            </article>
+        </div>
+
+        <!-- RIGHT: SIDEBAR -->
+        <aside class="sidebar">
+            <!-- CATEGORIES -->
+            <div class="sidebar-block" id="categories">
+                <h3 class="sidebar-title">Categories</h3>
+                <ul class="category-list">
+                    <li><span class="name">Web Development</span><span>8</span></li>
+                    <li><span class="name">Programming Basics</span><span>5</span></li>
+                    <li><span class="name">Cyber Security</span><span>4</span></li>
+                    <li><span class="name">AI & Machine Learning</span><span>3</span></li>
+                    <li><span class="name">Career & Tips</span><span>6</span></li>
+                </ul>
+            </div>
+
+            <!-- TAGS -->
+            <div class="sidebar-block">
+                <h3 class="sidebar-title">Tags</h3>
+                <div class="tag-cloud">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>C Programming</span>
+                    <span>Python</span>
+                    <span>DSA</span>
+                    <span>Cyber Security</span>
+                    <span>Git & GitHub</span>
+                    <span>Projects</span>
+                    <span>Career</span>
+                </div>
+            </div>
+
+            <!-- RECENT POSTS -->
+            <div class="sidebar-block">
+                <h3 class="sidebar-title">Recent Posts</h3>
+                <ul class="recent-list">
+                    <li>
+                        <div class="recent-title">10 Project Ideas for C Beginners</div>
+                        <div class="recent-meta">Programming • 3 min read</div>
+                    </li>
+                    <li>
+                        <div class="recent-title">What is API? Simple Explanation</div>
+                        <div class="recent-meta">Web Dev • 5 min read</div>
+                    </li>
+                    <li>
+                        <div class="recent-title">Top 3 Chrome Extensions for Students</div>
+                        <div class="recent-meta">Productivity • 4 min read</div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </section>
+</main>
+
+<footer>
+    &copy; 2025 DevLearn Hub – Educational Tech Blog. Built using only HTML & CSS for learning purposes.
+</footer>
+
+</body>
+</html>
